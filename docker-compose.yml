@@ -1,0 +1,33 @@
+# See https://docs.docker.com/compose/compose-file/compose-file-v3/
+version: "3.9"
+
+services:
+  # Backend Service
+  back:
+    container_name: time-bucket-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+#    env_file:
+#      - ./backend/.env
+    ports:
+      - "8000:8000"
+    volumes:
+      # Bind package directory with volume because speeding up.
+      - go-packages:/go
+      - ./backend/src:/work
+#  front:
+#    container_name: time-bucket-frontend
+#    build:
+#      context: ./frontend
+#      dockerfile: ./docker/Dockerfile.dev
+#    ports:
+#      - "3000:3000"
+#    volumes:
+#      # Bind package directory with volume because speeding up.
+#      - node-packages:/app/node
+#      - ./frontend:/app
+
+volumes:
+  go-packages:
+  node-packages:
