@@ -3,11 +3,11 @@ version: "3.9"
 
 services:
   # Backend Service
-  back:
+  backend:
     container_name: time-bucket-backend
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: docker/backend/Dockerfile
 #    env_file:
 #      - ./backend/.env
     ports:
@@ -16,7 +16,7 @@ services:
       # Bind package directory with volume because speeding up.
       - go-packages:/go
       - ./backend/src:/work
-#  front:
+#  frontend:
 #    container_name: time-bucket-frontend
 #    build:
 #      context: ./frontend
@@ -29,13 +29,17 @@ services:
 #      - ./frontend:/app
   db:
     container_name: time-bucket-db
-    image: mysql:8.0
+    platform: linux/x86_64
+    image: mysql:5.7
     ports:
       - "3306:3306"
     volumes:
       - db-data:/var/lib/mysql
     environment:
+      MYSQL_DATABASE: db
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: app
+      MYSQL_PASSWORD: app
 
 volumes:
   go-packages:
