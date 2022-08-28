@@ -27,7 +27,17 @@ services:
 #      # Bind package directory with volume because speeding up.
 #      - node-packages:/app/node
 #      - ./frontend:/app
+  db:
+    container_name: time-bucket-db
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
 
 volumes:
   go-packages:
   node-packages:
+  db-data:
