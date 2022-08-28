@@ -11,7 +11,7 @@ services:
 #    env_file:
 #      - ./backend/.env
     ports:
-      - "8000:8000"
+      - "8080:8080"
     volumes:
       # Bind package directory with volume because speeding up.
       - go-packages:/go
