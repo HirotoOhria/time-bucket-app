@@ -1,5 +1,6 @@
 import React from 'react';
 import { useBucketItems } from '../api/bucket_item_api';
+import { Link } from 'react-router-dom';
 
 const BucketItems = () => {
   const { bucketItems, isLoading, isError } = useBucketItems();
@@ -14,6 +15,9 @@ const BucketItems = () => {
   return (
     <>
       <h1>Bucket Items</h1>
+      <button>
+        <Link to='/bucket-item/create'>Create Bucket Item</Link>
+      </button>
       <table>
         <thead>
           <tr>

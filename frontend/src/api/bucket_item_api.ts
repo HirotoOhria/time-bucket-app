@@ -1,7 +1,13 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import useSWR from 'swr';
 import { BucketItem } from '../domain/entity/bucket_item';
-import { BackendErrorResponse, baseAxios, BaseSuccessResponse } from './axios';
+import {
+  BackendErrorResponse,
+  baseAxios,
+  BaseSuccessResponse,
+  SuccessResponse,
+} from './axios';
+import { useEffect, useState } from 'react';
 
 type BucketItemsResponse = BaseSuccessResponse & {
   bucketItems?: BucketItem[];
@@ -36,5 +42,33 @@ export const useBucketItem = (): BucketItemResponse => {
     bucketItem: data?.data,
     isLoading: !error && !data,
     isError: error,
+  };
+};
+
+export const callCreateBucketItem = (name: string): SuccessResponse => {
+  const params = new FormData();
+  params.append('name', name);
+
+  baseAxios
+    .post('/bucket_item', params)
+    .then((res: AxiosResponse<SuccessResponse>) => {
+      return {
+        success: res.data.success,
+        isLoading: false,
+        isError: undefined,
+      };
+    })
+    .catch((err: AxiosError<BackendErrorResponse>) => {
+      return {
+        success: undefined,
+        isLoading: false,
+        isError: err,
+      };
+    });
+
+  return {
+    success: undefined,
+    isLoading: true,
+    isError: undefined,
   };
 };
