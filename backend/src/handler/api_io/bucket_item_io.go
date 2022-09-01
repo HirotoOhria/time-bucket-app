@@ -9,6 +9,8 @@ type BucketItemGetOutput struct {
 	Name string `json:"name"`
 }
 
+type BucketItemListOutput []*BucketItemGetOutput
+
 type BucketItemCreateInput struct {
 	Name string `json:"name"`
 }

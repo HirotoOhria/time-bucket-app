@@ -7,5 +7,6 @@ import (
 
 type BucketItemRepository interface {
 	Get(id value.BucketItemID) (*entity.BucketItem, error)
+	List() ([]*entity.BucketItem, error)
 	Insert(bucketItem *entity.BucketItem) error
 }

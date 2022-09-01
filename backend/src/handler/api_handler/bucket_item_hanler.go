@@ -37,6 +37,17 @@ func (h *BucketItemHandler) getGetInput(c *gin.Context) *api_io.BucketItemGetInp
 	}
 }
 
+func (h *BucketItemHandler) List(c *gin.Context) {
+	o, err := h.bucketItemUsecase.List()
+	if err != nil {
+		fmt.Printf("failed to list bucket item: %v\n", err)
+		responseInternal(c, err)
+		return
+	}
+
+	responseOK(c, o)
+}
+
 func (h *BucketItemHandler) Create(c *gin.Context) {
 	i := h.getCreateInput(c)
 

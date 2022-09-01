@@ -12,6 +12,7 @@ func Route(r *gin.Engine, dbmap *gorp.DbMap) {
 	r.GET("/health_check", api_handler.HandleHealthCheck)
 
 	h := injector.InjectBucketItemHandler(dbmap)
+	r.GET("/bucket_items", h.List)
 	r.GET("/bucket_item/:id", h.Get)
 	r.POST("/bucket_item", h.Create)
 }

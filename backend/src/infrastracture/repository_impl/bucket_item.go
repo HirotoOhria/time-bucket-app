@@ -33,9 +33,23 @@ WHERE id = ?
 	if err := r.db.SelectOne(&bucketItem, query, id); err != nil {
 		return nil, wrapSQLError(err)
 	}
-	fmt.Printf("bucketItem on repository impl: %+v\n", bucketItem)
 
 	return convertBucketItemToEntity(bucketItem)
+}
+
+func (r *bucketItemRepositoryImpl) List() ([]*entity.BucketItem, error) {
+	var bucketItems []*model.BucketItem
+
+	query := fmt.Sprintf(`
+SELECT %s
+FROM bucket_items
+`, bucketItemColumns)
+
+	if _, err := r.db.Select(&bucketItems, query); err != nil {
+		return nil, wrapSQLError(err)
+	}
+
+	return convertBucketItemsToEntity(bucketItems)
 }
 
 func (r *bucketItemRepositoryImpl) Insert(bucketItem *entity.BucketItem) error {
@@ -58,6 +72,20 @@ func convertBucketItemToEntity(bucketItem *model.BucketItem) (*entity.BucketItem
 		ID:   id,
 		Name: bucketItem.Name,
 	}, nil
+}
+
+func convertBucketItemsToEntity(bucketItems []*model.BucketItem) ([]*entity.BucketItem, error) {
+	var err error
+
+	res := make([]*entity.BucketItem, len(bucketItems))
+	for i, bi := range bucketItems {
+		res[i], err = convertBucketItemToEntity(bi)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return res, nil
 }
 
 func convertBucketITemToModel(bucketItem *entity.BucketItem) *model.BucketItem {
