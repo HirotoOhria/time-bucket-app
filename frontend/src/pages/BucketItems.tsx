@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { BucketItem } from '../domain/entity/bucket_item';
-import { useBucketItem } from '../api/bucket_item_api';
+import React from 'react';
+import { useBucketItems } from '../api/bucket_item_api';
 
 const BucketItems = () => {
-  const { bucketItem, isLoading, isError } = useBucketItem();
+  const { bucketItems, isLoading, isError } = useBucketItems();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (isError) {
+    return <div>{isError.response?.data.message}</div>;
+  }
 
   return (
     <>
@@ -16,10 +22,12 @@ const BucketItems = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>{bucketItem?.id}</td>
-            <td>{bucketItem?.name}</td>
-          </tr>
+          {bucketItems?.map((bucketItem, i) => (
+            <tr key={i}>
+              <td>{bucketItem?.id}</td>
+              <td>{bucketItem?.name}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </>

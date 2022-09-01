@@ -1,4 +1,9 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+
+export type BaseSuccessResponse = {
+  isLoading: boolean;
+  isError?: AxiosError<BackendErrorResponse>;
+}
 
 export type BackendErrorResponse = {
   message: string;
