@@ -16,17 +16,6 @@ services:
       # Bind package directory with volume because speeding up.
       - go-packages:/go
       - ./backend/src:/work
-#  frontend:
-#    container_name: time-bucket-frontend
-#    build:
-#      context: ./frontend
-#      dockerfile: ./docker/Dockerfile.dev
-#    ports:
-#      - "3000:3000"
-#    volumes:
-#      # Bind package directory with volume because speeding up.
-#      - node-packages:/app/node
-#      - ./frontend:/app
   db:
     container_name: time-bucket-db
     platform: linux/x86_64
