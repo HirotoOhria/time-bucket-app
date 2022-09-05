@@ -15,7 +15,7 @@ services:
     volumes:
       # Bind package directory with volume because speeding up.
       - go-packages:/go
-      - ./backend/src:/work
+      - ./backend:/backend
   db:
     container_name: time-bucket-db
     platform: linux/x86_64

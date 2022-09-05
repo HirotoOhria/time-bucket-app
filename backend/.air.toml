@@ -8,11 +8,11 @@ tmp_dir = "../tmp"
 
 [build]
 # Just plain old shell command. You could use `make` as well.
-cmd = "go build -trimpath -o ../bin/air_main ./app/main.go"
+cmd = "go build -trimpath -o ../tmp/air_main ./app/main.go"
 # Binary file yields from `cmd`.
-bin = "../bin/air_main"
+bin = "../tmp/air_main"
 # Customize binary.
-full_bin = "APP_ENV=dev APP_USER=air ../bin/air_main"
+full_bin = "APP_ENV=dev APP_USER=air ../tmp/air_main"
 # Watch these filename extensions.
 include_ext = ["go", "tpl", "tmpl", "html"]
 # Ignore these filename extensions or directories.
