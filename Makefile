@@ -20,8 +20,7 @@ create_migration:
 	migrate create -ext sql -dir $(MIGRATION_DIR) -seq create_table
 
 migrate_db:
-	migrate -path $(MIGRATION_DIR) -database $(DB_CONNECTION) up
+	migrate -path $(MIGRATION_DIR) -database '$(DB_CONNECTION)' up
 
 force_migratiton_version:
-	migrate -path $(MIGRATION_DIR) -database $(DB_CONNECTION) force 1
-
+	migrate -path $(MIGRATION_DIR) -database '$(DB_CONNECTION)' force 1
