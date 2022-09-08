@@ -7,5 +7,5 @@ import (
 )
 
 func InjectBucketItemRepository(dbmap *gorp.DbMap) repository.BucketItemRepository {
-	return repository_impl.NewBucketItemRepositoryImpl(dbmap)
+	return repository_impl.NewBucketItemRepository(dbmap)
 }

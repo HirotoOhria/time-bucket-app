@@ -12,10 +12,10 @@ import (
 )
 
 type bucketItemRepositoryImpl struct {
-	db *gorp.DbMap
+	db gorp.SqlExecutor
 }
 
-func NewBucketItemRepositoryImpl(db *gorp.DbMap) repository.BucketItemRepository {
+func NewBucketItemRepository(db gorp.SqlExecutor) repository.BucketItemRepository {
 	return &bucketItemRepositoryImpl{
 		db: db,
 	}
