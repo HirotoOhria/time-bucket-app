@@ -1,0 +1,6 @@
+CREATE TABLE `users` (
+    `id` VARCHAR(26) NOT NULL COMMENT 'ID',
+    `name` VARCHAR(255) NOT NULL COMMENT '名前',
+    `age` INT UNSIGNED NOT NULL '年齢',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COMMENT="タイムバケットのアイテム";
