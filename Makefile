@@ -22,5 +22,5 @@ create_migration:
 migrate_db:
 	migrate -path $(MIGRATION_DIR) -database '$(DB_CONNECTION)' up
 
-force_migratiton_version:
+force_to_migration_version:
 	migrate -path $(MIGRATION_DIR) -database '$(DB_CONNECTION)' force 1
